@@ -10,6 +10,7 @@ import GrayShadow from "../grayShadow/GrayShadow";
 
 class App extends Component {
 
+    // selectedChar отправляем в CharList, и там по клику на item вернется колбэк, в App изменится state, и новый props уйдет в CharInfo, в произодйдет запрос на сервер на получение персонажа по id
     state = {
         selectedChar: null
     }
