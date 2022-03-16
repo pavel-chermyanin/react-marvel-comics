@@ -12,6 +12,7 @@
             font-size: 22px;
             line-height: 29px;
             text-transform: uppercase;
+            
         }
         .skeleton {
             margin-top: 30px;
@@ -25,6 +26,10 @@
             width: 150px;
             height: 150px;
             object-fit: cover;
+
+            &.notFound{
+                object-fit: contain;
+            }
         }
     }
     &__btns {

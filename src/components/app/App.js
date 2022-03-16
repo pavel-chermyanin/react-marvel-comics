@@ -3,8 +3,10 @@ import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
-
 import decoration from '../../resources/img/vision.png';
+import ErrorBoundary from "../errorBoundary/ErrorBoundary";
+import GrayShadow from "../grayShadow/GrayShadow";
+
 
 class App extends Component {
 
@@ -24,10 +26,21 @@ class App extends Component {
             <div className="app">
                 <AppHeader />
                 <main>
-                    <RandomChar />
+                    {/* ErrorBoundary Позволяет отлавливать ошибки с помощью хука componentDidCatch() */}
+                    <ErrorBoundary>
+                        <RandomChar />
+                    </ErrorBoundary>
                     <div className="char__content">
-                        <CharList onCharSelected={this.onCharSelected}/>
-                        <CharInfo charId={this.state.selectedChar}/>
+                        <ErrorBoundary>
+                            <CharList onCharSelected={this.onCharSelected} />
+                        </ErrorBoundary>
+                        {/* GrayShadow позволяет оборачивать своих потомков дополнительным функционалом при помощи React.Children */}
+                        <GrayShadow>
+                            <ErrorBoundary>
+                                <CharInfo charId={this.state.selectedChar} />
+                            </ErrorBoundary>
+                        </GrayShadow>
+                        
                     </div>
                     <img className="bg-decoration" src={decoration} alt="vision" />
                 </main>

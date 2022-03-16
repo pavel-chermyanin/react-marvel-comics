@@ -31,6 +31,9 @@
     }
 
     &__name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-weight: bold;
         font-size: 22px;
         line-height: 29px;
