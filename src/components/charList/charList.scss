@@ -9,6 +9,7 @@
         align-items: start;
     }
     &__grid {
+        padding-left: 0;
         display: grid;
         grid-template-columns: repeat(3, 200px);
         column-gap: 25px;

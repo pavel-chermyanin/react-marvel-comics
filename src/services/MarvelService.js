@@ -4,7 +4,7 @@ class MarvelService{
 
     _apiBase = 'https://gateway.marvel.com:443/v1/public/';
     _apiKey = 'apikey=4a9575917104ab1d75f2fc9150473928';
-    _baseOffset = 210;
+    _baseOffset = 1376;
 
     // Функция запрашивает данные по указанному url, возвращает js объект при успехе иначе ошибку
     // перед функцией указывается async

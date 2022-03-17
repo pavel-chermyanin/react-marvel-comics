@@ -5,7 +5,6 @@ import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 import decoration from '../../resources/img/vision.png';
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
-import GrayShadow from "../grayShadow/GrayShadow";
 
 
 class App extends Component {
@@ -36,11 +35,9 @@ class App extends Component {
                             <CharList onCharSelected={this.onCharSelected} />
                         </ErrorBoundary>
                         {/* GrayShadow позволяет оборачивать своих потомков дополнительным функционалом при помощи React.Children */}
-                        <GrayShadow>
                             <ErrorBoundary>
                                 <CharInfo charId={this.state.selectedChar} />
                             </ErrorBoundary>
-                        </GrayShadow>
                         
                     </div>
                     <img className="bg-decoration" src={decoration} alt="vision" />
