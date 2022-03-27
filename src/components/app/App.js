@@ -1,4 +1,4 @@
-import { Component } from "react/cjs/react.development";
+import { useState } from "react/cjs/react.development";
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
@@ -7,44 +7,37 @@ import decoration from '../../resources/img/vision.png';
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 
-class App extends Component {
+const App = () => {
 
     // selectedChar отправляем в CharList, и там по клику на item вернется колбэк, в App изменится state, и новый props уйдет в CharInfo, в произодйдет запрос на сервер на получение персонажа по id
-    state = {
-        selectedChar: null
+    const [selectedChar, setChar] = useState(null)
+
+    const onCharSelected = (id) => {
+        setChar(id);
     }
 
-    onCharSelected = (id) => {
-        this.setState({
-            selectedChar: id
-        })
-    }
-
-
-    render() {
-        return (
-            <div className="app">
-                <AppHeader />
-                <main>
-                    {/* ErrorBoundary Позволяет отлавливать ошибки с помощью хука componentDidCatch() */}
+    return (
+        <div className="app">
+            <AppHeader />
+            <main>
+                {/* ErrorBoundary Позволяет отлавливать ошибки с помощью хука componentDidCatch() */}
+                <ErrorBoundary>
+                    <RandomChar />
+                </ErrorBoundary>
+                <div className="char__content">
                     <ErrorBoundary>
-                        <RandomChar />
+                        <CharList onCharSelected={onCharSelected} />
                     </ErrorBoundary>
-                    <div className="char__content">
-                        <ErrorBoundary>
-                            <CharList onCharSelected={this.onCharSelected} />
-                        </ErrorBoundary>
-                        {/* GrayShadow позволяет оборачивать своих потомков дополнительным функционалом при помощи React.Children */}
-                            <ErrorBoundary>
-                                <CharInfo charId={this.state.selectedChar} />
-                            </ErrorBoundary>
-                        
-                    </div>
-                    <img className="bg-decoration" src={decoration} alt="vision" />
-                </main>
-            </div>
-        )
-    }
+                    {/* GrayShadow позволяет оборачивать своих потомков дополнительным функционалом при помощи React.Children */}
+                    <ErrorBoundary>
+                        <CharInfo charId={selectedChar} />
+                    </ErrorBoundary>
+
+                </div>
+                <img className="bg-decoration" src={decoration} alt="vision" />
+            </main>
+        </div>
+    )
 }
 
 export default App;
