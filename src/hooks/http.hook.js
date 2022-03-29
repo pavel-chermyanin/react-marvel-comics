@@ -1,5 +1,9 @@
 import { useState, useCallback } from "react";
 
+
+
+// наш кастомный хук со совим стейтем, передаем ему url, он делает запрос на сервер,
+// отлавливает ошибки и крутит спинер пока идет запрос
 export const useHttp = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);

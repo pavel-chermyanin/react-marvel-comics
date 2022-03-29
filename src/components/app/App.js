@@ -23,7 +23,7 @@ const App = () => {
         <div className="app">
             <AppHeader />
             <main>
-                <SingleComic/>
+                <SingleComic id={1333}/>
                 {/* <ComicsList/> */}
                 {/* ErrorBoundary Позволяет отлавливать ошибки с помощью хука componentDidCatch() */}
                 {/* <ErrorBoundary>
