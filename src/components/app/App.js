@@ -5,6 +5,9 @@ import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 import decoration from '../../resources/img/vision.png';
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
+import ComicsList from "../comicsList/ComicsList";
+import SingleComic from "../singleComic/SingleComic";
+
 
 
 const App = () => {
@@ -20,21 +23,23 @@ const App = () => {
         <div className="app">
             <AppHeader />
             <main>
+                <SingleComic/>
+                {/* <ComicsList/> */}
                 {/* ErrorBoundary Позволяет отлавливать ошибки с помощью хука componentDidCatch() */}
-                <ErrorBoundary>
+                {/* <ErrorBoundary>
                     <RandomChar />
                 </ErrorBoundary>
                 <div className="char__content">
                     <ErrorBoundary>
                         <CharList onCharSelected={onCharSelected} />
-                    </ErrorBoundary>
+                    </ErrorBoundary> */}
                     {/* GrayShadow позволяет оборачивать своих потомков дополнительным функционалом при помощи React.Children */}
-                    <ErrorBoundary>
+                    {/* <ErrorBoundary>
                         <CharInfo charId={selectedChar} />
                     </ErrorBoundary>
 
                 </div>
-                <img className="bg-decoration" src={decoration} alt="vision" />
+                <img className="bg-decoration" src={decoration} alt="vision" /> */}
             </main>
         </div>
     )

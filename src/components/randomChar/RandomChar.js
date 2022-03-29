@@ -1,60 +1,43 @@
 import { useState, useEffect } from 'react/cjs/react.development';
 
-import MarvelService from '../../services/MarvelService';
+import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 
-const RandomChar = (props) => {
+const RandomChar = () => {
 
-    const [char, setChar] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const [char, setChar] = useState(null);
+    const { loading, error, getCharacter, clearError } = useMarvelService()
 
-    const marvelService = new MarvelService();
-
-    // При первом монтировании помпонента вызвать updateChar()
     useEffect(() => {
         updateChar();
+        const timerId = setInterval(updateChar, 60000);
+
+        return () => {
+            clearInterval(timerId)
+        }
     }, [])
 
-    // если объект подрузился обновляем state и устанавливаем loading true, чтобы сменить Spinner на View
     const onCharLoaded = (char) => {
         setChar(char);
-        setLoading(false)
     }
 
-    const onCharLoading = () => {
-        setError(false)
-        setLoading(true)
-    }
-
-    const onError = () => {
-        setLoading(false);
-        setError(true)
-    }
-
-    // сначала генерируем случайное id
-    // далее используем экземпляр класса MarvelService
-    // и вызываем на нем метод getCharacter со случайным id, который вернет объект случайного персонажа с нужными нам свойствами
-    // этот объект помещаем аргументом в функцию onCharLoaded, которая обновляет state
-    // в случае ошибки меняем в state error на true, loading на false
     const updateChar = () => {
+        clearError();
+        
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-        onCharLoading();
 
-        marvelService
-            .getCharacter(id)
+        getCharacter(id)
             .then(onCharLoaded)
-            .catch(onError)
     }
 
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
     // если нет загрузки или нет ошибки, тогда отобрази контент
-    const content = !(loading || error) ? <View char={char} /> : null;
+    const content = !(loading || error|| !char) ? <View char={char} /> : null;
 
     return (
         <div className="randomchar">

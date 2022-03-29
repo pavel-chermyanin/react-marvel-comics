@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './components/app/App';
 import './style/style.scss';
 
-import { Button, Form } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import { Button, Form } from 'react-bootstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 // class MyForm extends React.Component {
@@ -60,7 +60,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    {/* <MyForm /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
