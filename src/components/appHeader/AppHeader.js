@@ -13,9 +13,26 @@ const AppHeader = () => {
             <nav className="app__menu">
                 <ul>
                     {/* NavLink дает класс активной ссылке */}
-                    <li><NavLink exact activeStyle={{'color': '#f90013'}} to="/">Characters</NavLink></li>
+                    <li>
+                        <NavLink
+                            end
+                            style={({ isActive }) => ({
+                                color: isActive ? '#f90013' : 'inherit',
+                            })}
+                            to="/">Characters
+                        </NavLink>
+                    </li>
                     /
-                    <li><NavLink exact activeStyle={{'color': '#f90013'}} to="/comics">Comics</NavLink></li>
+                    <li>
+                        <NavLink
+                            end
+                            // NavLink принимает атрибут style, который принимает функцию, которая получает параметром объект, из которого мы деструктурируем поле isActive. Функция возвращает объект со стилями
+                            style={({ isActive }) => ({
+                                color: isActive ? '#f90013' : 'inherit',
+                            })}
+                            to="/comics">Comics
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>
