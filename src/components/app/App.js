@@ -1,47 +1,39 @@
-import { useState } from "react/cjs/react.development";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+
 import AppHeader from "../appHeader/AppHeader";
-import RandomChar from "../randomChar/RandomChar";
-import CharList from "../charList/CharList";
-import CharInfo from "../charInfo/CharInfo";
-import decoration from '../../resources/img/vision.png';
-import ErrorBoundary from "../errorBoundary/ErrorBoundary";
-import ComicsList from "../comicsList/ComicsList";
-import SingleComic from "../singleComic/SingleComic";
+import { MainPage, ComicsPage } from '../pages';
+
+
+
+
+
 
 
 
 const App = () => {
 
-    // selectedChar отправляем в CharList, и там по клику на item вернется колбэк, в App изменится state, и новый props уйдет в CharInfo, в произодйдет запрос на сервер на получение персонажа по id
-    const [selectedChar, setChar] = useState(null)
-
-    const onCharSelected = (id) => {
-        setChar(id);
-    }
 
     return (
-        <div className="app">
-            <AppHeader />
-            <main>
-                <SingleComic id={1333}/>
-                {/* <ComicsList/> */}
-                {/* ErrorBoundary Позволяет отлавливать ошибки с помощью хука componentDidCatch() */}
-                {/* <ErrorBoundary>
-                    <RandomChar />
-                </ErrorBoundary>
-                <div className="char__content">
-                    <ErrorBoundary>
-                        <CharList onCharSelected={onCharSelected} />
-                    </ErrorBoundary> */}
-                    {/* GrayShadow позволяет оборачивать своих потомков дополнительным функционалом при помощи React.Children */}
-                    {/* <ErrorBoundary>
-                        <CharInfo charId={selectedChar} />
-                    </ErrorBoundary>
-
-                </div>
-                <img className="bg-decoration" src={decoration} alt="vision" /> */}
-            </main>
-        </div>
+        // Оборачиваем все приложение в BrowserRouter
+        <Router>
+            <div className="app">
+                {/* в AppHeader нас находятся Link управляющие роутингом */}
+                <AppHeader />
+                <main>
+                    {/* Оборачиваем в Switch, который будет переключать отдельные Route */}
+                    <Switch>
+                        {/* Этот Route отрисуется когда в адресной строке браузера будет главная страница в точности */}
+                        <Route exact path="/">
+                           <MainPage/>
+                        </Route>
+                        {/* Этот Route отрисуется когда в адресе добавится /comics */}
+                        <Route exact path="/comics">
+                            <ComicsPage/>
+                        </Route>
+                    </Switch>
+                </main>
+            </div>
+        </Router>
     )
 }
 
