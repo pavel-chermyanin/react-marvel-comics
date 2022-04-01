@@ -39,6 +39,8 @@ const ComicsList = () => {
                 <li
                     key={`${item.id}-${item.title}`}
                     className="comics__item">
+                    {/* по клику на комикс в url браузера допишется id элемента,
+                    и это отловит useParams в компоненте SingleComicsPage */}
                     <Link to={`/comics/${item.id}`}>
                         <img src={item.thumbnail} alt="ultimate war" className="comics__item-img" />
                         <div className="comics__item-name">{item.title}</div>
