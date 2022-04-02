@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import AppHeader from "../appHeader/AppHeader";
+import SingleCharacterPage from "../singleChracterPage/SingleCharacterPage";
 
 import Spinner from "../spinner/Spinner";
 
@@ -10,7 +11,6 @@ const Page404 = lazy(() => import('../pages/404'));
 const MainPage = lazy(() => import('../pages/MainPage'));
 const ComicsPage = lazy(() => import('../pages/ComicsPage'));
 const SingleComicPage = lazy(() => import('../pages/SingleComicPage'));
-
 const App = () => {
     return (
         // Оборачиваем все приложение в BrowserRouter
@@ -30,6 +30,7 @@ const App = () => {
                             <Route path="/comics" element={<ComicsPage />} />
                             {/* строку :comicId отловит useParams, находящийся внутри, отправится запрос на получение comic, компонент отрисуется заново */}
                             <Route path="/comics/:comicId" element={<SingleComicPage />} />
+                            <Route path="/characters/:charId" element={<SingleCharacterPage />} />
                             <Route path="*" element={<Page404 />} />
                         </Routes>
                     </Suspense>

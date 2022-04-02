@@ -1,4 +1,5 @@
 import { useState } from "react/cjs/react.development";
+import Helmet from "react-helmet";
 import React from 'react'
 
 import RandomChar from "../randomChar/RandomChar";
@@ -7,6 +8,7 @@ import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 import decoration from '../../resources/img/vision.png';
+import CharForm from "../form/Form";
 
 
 function MainPage() {
@@ -17,25 +19,34 @@ function MainPage() {
         setChar(id);
     }
 
-  return (
-    <>
-          {/* ErrorBoundary Позволяет отлавливать ошибки с помощью хука componentDidCatch() */}
-          <ErrorBoundary>
-              <RandomChar />
-          </ErrorBoundary>
-          <div className="char__content">
-              <ErrorBoundary>
-                  <CharList onCharSelected={onCharSelected} />
-              </ErrorBoundary>
-              {/* GrayShadow позволяет оборачивать своих потомков дополнительным функционалом при помощи React.Children */}
-              <ErrorBoundary>
-                  <CharInfo charId={selectedChar} />
-              </ErrorBoundary>
+    return (
+        <>
+            <Helmet>
+                <meta
+                    name="description"
+                    content="Marvel information portal" />
+                <title>Marvel information portal</title>    
+            </Helmet>
+            {/* ErrorBoundary Позволяет отлавливать ошибки с помощью хука componentDidCatch() */}
+            <ErrorBoundary>
+                <RandomChar />
+            </ErrorBoundary>
+            <div className="char__content">
+                <ErrorBoundary>
+                    <CharList onCharSelected={onCharSelected} />
+                </ErrorBoundary>
+                {/* GrayShadow позволяет оборачивать своих потомков дополнительным функционалом при помощи React.Children */}
+                <div className="char__sidebar">
+                    <ErrorBoundary>
+                        <CharInfo charId={selectedChar} />
+                    </ErrorBoundary>
+                    <CharForm />
 
-          </div>
-          <img className="bg-decoration" src={decoration} alt="vision" />
-    </>
-  )
+                </div>
+            </div>
+            <img className="bg-decoration" src={decoration} alt="vision" />
+        </>
+    )
 }
 
 export default MainPage

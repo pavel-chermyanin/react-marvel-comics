@@ -1,0 +1,46 @@
+@import '../../style/variables.scss';
+
+
+.charform{
+    margin-top: 30px;
+    padding: 25px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+
+    &__title{
+        margin-bottom: 30px;
+        font-size: 20px;
+    }
+
+    &__label{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__input{
+        width: 100%;
+        margin-right: 30px;
+        border: none;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+        padding: 8px 20px;
+    }
+    &__error{
+        margin-top: 20px;
+    }
+
+    &__search{
+        width: 100%;
+        margin-right: 30px;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-success{
+            color: green;
+        }
+    }    
+    &__search-error{
+        margin-top: 20px;
+        color: red;
+    }    
+}
